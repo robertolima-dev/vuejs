@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="app">
+
+            <form v-on:submit.prevent="alterarNome('Roberto Lima', $event)">
+                <input type="text" v-model="textoDigitado" placeholder="digite um nome">
+                <br>
+                <button type="submit">
+                    Alterar um nome!
+                </button>
+            </form>
+            <hr>
+
+            <input type="text" v-model="textoDigitado2" v-on:keyup.enter="addValue()" placeholder="digite uma lista">
+
+            <ul>
+                <li v-for="item in array" @click="alerta($event)" style="background: white;">
+                    {{ item }}
+                </li>
+            </ul>
+            <hr>
+
+            red
+            <input @click="corParagrafo($event.target.value)" type="radio" name="cor" value="red" checked />
+            green
+            <input @click="corParagrafo($event.target.value)" type="radio" name="cor" value="green">
+            blue
+            <input @click="corParagrafo($event.target.value)" type="radio" name="cor" value="blue">
+            yellow
+            <input @click="corParagrafo($event.target.value)" type="radio" name="cor" value="yellow">
+
+            <p v-bind:class="classParagrafo">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lectus arcu, gravida sed orci eu, ultricies faucibus ligula. Cras varius, lectus a iaculis condimentum, odio arcu venenatis ex, id aliquet nunc nisl eget purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam ut fermentum quam, eget scelerisque odio. Nulla volutpat aliquet eros, ac volutpat elit varius at. Suspendisse ac erat ultricies, ornare nibh et, consequat risus. Phasellus dictum, risus sit amet rhoncus sodales, leo risus tempor urna, non convallis tortor odio in felis. Quisque imperdiet tempor efficitur.
+            </p>
+            <hr>
+
+            <button @click="vermelho()">vermelho</button>
+            <button @click="verde()">verde</button>
+            <button @click="incolor()">incolor</button>
+            <p v-bind:class="{red: colors.vermelho, green: colors.verde}">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lectus arcu, gravida sed orci eu, ultricies faucibus ligula. Cras varius, lectus a iaculis condimentum, odio arcu venenatis ex, id aliquet nunc nisl eget purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam ut fermentum quam, eget scelerisque odio. Nulla volutpat aliquet eros, ac volutpat elit varius at. Suspendisse ac erat ultricies, ornare nibh et, consequat risus. Phasellus dictum, risus sit amet rhoncus sodales, leo risus tempor urna, non convallis tortor odio in felis. Quisque imperdiet tempor efficitur.
+            </p>
+            <hr>
+
+            <button @click="roxo()">roxo</button>
+            <button @click="borda()">borda</button>
+            <button @click="incolor2()">incolor</button>
+            <p ref="firstParagraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lectus arcu, gravida sed orci eu, ultricies faucibus ligula. Cras varius, lectus a iaculis condimentum, odio arcu venenatis ex, id aliquet nunc nisl eget purus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam ut fermentum quam, eget scelerisque odio. Nulla volutpat aliquet eros, ac volutpat elit varius at. Suspendisse ac erat ultricies, ornare nibh et, consequat risus. Phasellus dictum, risus sit amet rhoncus sodales, leo risus tempor urna, non convallis tortor odio in felis. Quisque imperdiet tempor efficitur.
+            </p>
+
+        </div>
+
+        <style>
+        .red {background-color: red}
+        .green {background-color: green}
+        .blue {background-color: blue}
+        .yellow {background-color: yellow}
+        </style>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            new Vue({
+                el: '#app',
+                data: {
+                    textoDigitado: '',
+                    textoDigitado2: '',
+                    array: [],
+                    classParagrafo: 'red',
+                    colors: {
+                        vermelho: true,
+                        verde: false
+                    }
+                },
+                methods: {
+                    alterarNome(nome, event) {
+                        this.textoDigitado = nome;
+                    },
+                    addValue() {
+                        this.array.push(this.textoDigitado2)
+                        this.textoDigitado2 = ''
+                    },
+                    alerta(event) {
+                        // alert(event.target.textContent.trim());
+                        element = event.target;
+                        if(element.style.background == 'white'){
+                            event.target.style = "background: red;"
+                        } else {
+                            event.target.style = "background: white;"
+                        }
+                    },
+                    corParagrafo(cor) {
+                        this.classParagrafo = cor;
+                    },
+                    vermelho() {
+                        this.colors.vermelho = true;
+                        this.colors.verde = false;
+                    },
+                    verde() {
+                        this.colors.vermelho = false;
+                        this.colors.verde = true;
+                    },
+                    incolor() {
+                        this.colors.vermelho = false;
+                        this.colors.verde = false;
+                    },
+                    roxo() {
+                        this.$refs.firstParagraph.style.background = "purple"
+                    },
+                    borda() {
+                        this.$refs.firstParagraph.style.border = "2px solid black"
+                    },
+                    incolor2() {
+                        this.$refs.firstParagraph.style.background = ""
+                        this.$refs.firstParagraph.style.border = ""
+                    }
+
+                }
+            });
+        </script>
+    </body>
+
+</html>

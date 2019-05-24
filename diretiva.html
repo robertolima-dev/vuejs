@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="app">
+            <input type="text" v-model="textoDigitado">
+            <br>
+            {{ textoDigitado }}
+            <br>
+
+            <input type="text" v-model="textoDigitado2">
+            <br>
+            <button v-on:click="alterarNome()">
+                Alterar um nome!
+            </button>
+            <br>
+            <label v-text="textoDigitado2"></label>
+            <br>
+
+            <a v-bind:href="url">Link pela diretiva!</a>
+            <p v-text="'Teste de texto por uma diretiva!'"></p>
+            <hr>
+
+            <p v-html="'Teste de texto <b>por uma diretiva!</b>'"></p>
+            <hr>
+
+            <div v-if="textoDigitado == 1">
+                <img :src="srcImg1" :title="titleImg" width="100px"> <!-- Quando add apenas os : significa um v-bind -->
+            </div>
+            <div v-else-if="textoDigitado == 2">
+                <img :src="srcImg2" :title="titleImg" width="100px"> <!-- Quando add apenas os : significa um v-bind -->
+            </div>
+            <div v-else>
+                <img :src="srcImg3" :title="titleImg" width="100px"> <!-- Quando add apenas os : significa um v-bind -->
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <script>
+
+            new Vue({
+                el: '#app',
+                data: {
+                    textoDigitado: '',
+                    textoDigitado2: '',
+                    url: 'https://www.google.com/',
+                    srcImg1: 'ferrari1.jpg',
+                    srcImg2: 'ferrari2.jpeg',
+                    srcImg3: 'ferrari3.jpg',
+                    titleImg: 'Ferrari'
+                },
+                methods: {
+                    alterarNome() {
+                        this.textoDigitado2 = 'Roberto Lima';
+                    }
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

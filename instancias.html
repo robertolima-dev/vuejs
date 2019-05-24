@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <button onclick="imprimir()">Mudar mensagem</button>
+        <div id="app1">
+            {{ nome }}
+        </div>
+        <hr>
+
+        <div id="app2">
+            <button @click="imprimir2()">Mudar mensagem</button>
+            <br>
+            {{ nome }}
+        </div>
+        <hr>
+
+        <button onclick="carregar()">Carregar</button>
+        <div id="app3">
+            
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+
+            let mensagem = 'Minha aplicação';
+
+            function imprimir() {
+                app1.nome = 'Nova Mensagem 1 - usando javascript';
+            }
+
+            function carregar() {
+                app3.$mount('#app3');
+            }
+
+            const app1 = new Vue({
+                el: '#app1',
+                data: {
+                    nome: `${mensagem} 1`
+                }
+            });
+
+            const app2 = new Vue({
+                el: '#app2',
+                data: {
+                    nome: `${mensagem} 2`
+                },
+                methods: {
+                    imprimir2() {
+                        app2.nome = 'Nova Mensagem 2 - usando Vue';
+                    }
+                }
+            });
+
+            const app3 = new Vue({
+                data: {
+                    nome: 'Hello World!'
+                },
+               template: '<h1>{{nome}}</h1>'
+            });
+
+        </script>
+    </body>
+
+</html>

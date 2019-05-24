@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="app">
+
+            <div v-for="imagem in imagens">
+                <img :src="imagem" width="200px">
+            </div>
+            <hr>
+
+            <p v-for="(fruta, index) in frutas">
+                {{ index }} - {{ fruta }}
+            </p>
+            <hr>
+
+            <p v-for="(frutaObj, index) in frutasObj">
+                {{ index }} - {{ frutaObj.nome }} da cor {{ frutaObj.cor }}
+            </p>
+            <hr>
+
+            <ul>
+                <li v-for="(value, key, index) in usuario">
+                    {{key}}:{{value}}
+                </li>
+            </ul>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+        <script>
+
+            new Vue({
+                el: '#app',
+                data: {
+                    imagens: ['ferrari1.jpg', 'ferrari2.jpeg', 'ferrari3.jpg'],
+                    frutas: ['Maçã', 'Banana', 'Melão', 'Caqui', 'Uva', 'Pera',],
+                    frutasObj: [
+                        { nome: 'Maçã', cor: 'Vermelha' }, 
+                        { nome: 'Banana', cor: 'Amarela' }, 
+                        { nome: 'Melão', cor: 'Creme' }, 
+                        { nome: 'Caqui', cor: 'Vermelho' }, 
+                        { nome: 'Uva', cor: 'Roxa' }, 
+                        { nome: 'Pera', cor: 'Amarela' } ],
+                    usuario: {
+                        nome: 'Roberto',
+                        email: 'roberto@teste.com.br',
+                        telefone: '11 981044245',
+                        senha: '123456'
+                    }
+                }
+            });
+
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div id="app">
+            {{ nome }} <!-- será substituido pelo template! -->
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+
+            Vue.component('painel', {
+                data() {
+                    return {
+                        titulo: 'Painel de Notícias'
+                    }
+                },
+                methods: {
+                    alerta() {
+                        this.titulo = 'alerta';
+                    }
+                },
+                template: `
+                <div>
+                    <h1>{{ titulo }}</h1>
+                    <button @click="alerta()">Alerta</button>
+                </div>
+                `
+            });
+
+            const app = new Vue({
+                el: '#app',
+                data: {
+                    nome: 'Roberto'
+                },
+                methods: {
+                    atualizarAlgumaCoisa() {
+                        this.nome = 'Roberto Lima'
+                    },
+                    // destroy() => destroi a instancia do view (nada mais vai funcionar!)
+                    destruir() {
+                        this.$destroy();
+                    }
+                },
+                template: `
+                <div> 
+                <painel></painel>
+                <br>
+                {{ nome }}
+                <br>
+                <button @click="atualizarAlgumaCoisa()">Atualizar</button>
+                <br>
+                <button @click="destruir()">Destruir</button>
+                </div>`,
+
+                beforeCreate() {
+                    console.log('Antes de criar tudo!');
+                },
+                created() {
+                    console.log('Após criar tudo!');
+                },
+                beforeMount() {
+                    console.log('Antes de montar tudo!');
+                },
+                mounted() {
+                    console.log('Tudo montado!');
+                },
+                beforeUpdate() {
+                    console.log('Antes de atualizar!');
+                },
+                updated() {
+                    console.log('Depois de atualizar!');
+                },
+                beforeDestroy() {
+                    console.log('Antes de desturir!');
+                },
+                destroyed() {
+                    console.log('Destruido!');
+                },
+            });
+        </script>
+    </body>
+
+</html>
